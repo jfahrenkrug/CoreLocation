@@ -93,7 +93,6 @@
             [self stopUpdatingLocation];
         
         _updateId = navigator.geolocation.watchPosition(function(position){
-            
             var coordinate = new CLLocationCoordinate2D(position.coords.latitude, position.coords.longitude);
             var newLocation = [[CLLocation alloc] initWithCoordinate: coordinate 
                 altitude:position.coords.altitude 
@@ -107,7 +106,7 @@
                 [_delegate locationManager: self didUpdateToLocation: newLocation fromLocation: _location];
             }
             _location = newLocation;
-        }, function(error){CPLogConsole(error);}, {maximumAge:6000000000, timeout:0, enableHighAccuracy:(_desiredAccuracy<CLLocationAccuracyHundredMeters)});
+        }, function(error){CPLogConsole(error);}, {maximumAge:6000000000, timeout:240000, enableHighAccuracy:(_desiredAccuracy<CLLocationAccuracyHundredMeters)});
  }
  
  - (void) stopUpdatingLocation
